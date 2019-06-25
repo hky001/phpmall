@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/static/assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+{include file="../application/admin/view/common/header.html"/}
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  {include file="../application/admin/view/common/menu.html"/}
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">图片资料</strong> / <small>Personal information</small></div>
+      </div>
+
+      <hr/>
+
+      <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+          <form action="/admin/goods/update" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+           
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">ID</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="id"  placeholder="请输入ID"
+                value="{$result.id}" readonly="true"/>
+                
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">名称 / name</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="name"  placeholder="请输入名称 / name"
+                value="{$result.name}"/>
+                
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-phone" class="am-u-sm-3 am-form-label">商品价格 / price /</label>
+              <div class="am-u-sm-9">
+               <input type="text" name="price"  placeholder="请输入商品价格 / price"
+               value="{$result.price}"/>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-phone" class="am-u-sm-3 am-form-label">商品库存 / stock /</label>
+              <div class="am-u-sm-9">
+               <input type="text" name="stock"  placeholder="请输入商品库存 / stock"
+               value="{$result.stock}"/>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">商品分类 / division</label>
+              <div class="am-u-sm-9">
+                <select class="form-control" name="division" id="division" >>
+                  <option value="0">一级分类</option>
+                 {foreach $category as $val} 
+                  <option value="{$val.division_id}">{$val.name}</option>
+                 {/foreach}
+               </select>
+               <select class="form-control" name="second" id="second">
+                <option value="">二级分类</option>
+               </select>
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">商品销量 / sales</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="sales" placeholder="" value="{$result.sales}" readonly="true">
+                
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">商品评价数 / reviews</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="reviews" placeholder="" value="{$result.reviews}" readonly="true">
+              
+              </div>
+            </div>
+
+            <div class="am-form-group">
+              <label for="user-email" class="am-u-sm-3 am-form-label">商品收藏数 / collect</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="collect" placeholder="" value="{$result.collect}" readonly="true">
+      
+              </div>
+            </div>
+
+             <div class="am-form-group">
+              <label for="user-name" class="am-u-sm-3 am-form-label">图片 / picture</label>
+              <div class="am-u-sm-9">
+                <input type="file" name="img" />
+                <img src="{$result.img_src}" style="width: 200px">
+              </div>
+              
+              <!--<div class="am-u-sm-9">
+                <a style=" display: block;width: 120px;height: 30px;background: #F60;color: #FFF;text-align: center;line-height: 25px;">图片上传</a>
+                <input type="file" name="img" style="width: 120px;height: 30px;margin-top:-30px;opacity: 0;" onchange="upimg(this);" />
+              </div>-->
+            </div>
+            <div class="am-form-group">
+              <div class="am-u-sm-9 am-u-sm-push-3">
+                <button type="submit" class="am-btn am-btn-primary">保存修改</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+  </div>
+  <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/js/division.js">
+<!--<![endif]-->
+<script src="/static/assets/js/amazeui.min.js"></script>
+
+<script src="/static/assets/js/app.js"></script>
+</body>
+</html>

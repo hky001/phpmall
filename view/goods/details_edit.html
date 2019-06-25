@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin user Examples</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/static/assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+{include file="../application/admin/view/common/header.html"/}
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+  {include file="../application/admin/view/common/menu.html"/}
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">详情图修改</strong> / <small>Detail—edit</small></div>
+      </div>
+
+      <hr/>
+
+        
+      
+
+      <div class="am-g">
+        <div class="am-u-sm-12">
+          
+            <table class="am-table am-table-striped am-table-hover table-main">
+              <thead>
+              <tr>
+                <th class="table-check"></th>
+                <th class="table-goodsid">商品ID</th>
+                <th class="table-id">ID</th>
+                <th class="table-title">顺序</th>
+                <th class="table-type">图片</th>
+               
+                <th class="table-set">操作</th>
+              </tr>
+              </thead>
+               <tbody>
+                  {foreach $d_list as $key => $val}  
+                  <form action="/admin/goods/details_update" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">         
+              <tr>
+
+                <td><input type="checkbox" /></td>
+                <td><input type="text" value="{$val.goods_id}" name="goods_id"  style="width:40px;" readonly="true"></td>
+                <td><input type="text" value="{$val.id}" name="id" readonly="true" style="width:40px; "></td>
+                <td><input type="text" value="{$val.sort}" name="sort" style="width:40px;">
+
+                </td>
+
+                
+                <td class="am-hide-sm-only"> 
+                <img src="{$val.img_src}" name="img_src" style="width: 100px">
+                
+                </td>
+                
+                <td>
+                  <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                      <!-- <a href="/admin/goods/details_update?id={$val.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>保存</a> -->
+                      <!-- <a>上传图片：<input type="file" name="img" /></a> -->
+                      <a class="am-btn am-btn-secondary">图片上传
+                      <input type="file" name="img" style="width: 30px;height: 30px;margin-top:-30px;opacity: 0;" onchange="upimg(this);" /></a>
+
+                      <button type="submit" class="am-btn am-btn-default am-btn-xs am-text-secondary">保存修改</button>
+                      <a href="/admin/goods/details_del?id={$val.id}" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+
+                    </div>
+                  </div>
+                </td>
+                </form>
+              </tr>
+               {/foreach}
+              </tbody>
+            </table>
+            
+            </table>
+           
+            <hr />
+            <p>注：.....</p>
+          
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </footer>
+
+  </div>
+  <!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+</footer>
+
+
+<script src="/static/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/static/assets/js/amazeui.min.js"></script>
+
+<script src="/static/assets/js/app.js">
+function upimg(obj){
+        if(obj.value=="")return;
+        var formdata = new FormData();
+        formdata.append("image",$(obj)[0].files[0]);
+        $ajax({
+            type:'post',
+            url:'/admin/goods/upimg',
+            data:formdata,
+            cache:false,
+            processData:false,
+            contentType:false,
+            success:function(ret){
+                alert(ret);
+            },
+            error:function(){}
+        });
+    }
+    </script>
+</body>
+</html>
